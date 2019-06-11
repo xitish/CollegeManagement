@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+body{
+    font-family: 'Open Sans', sans-serif;
+}
+
+a{
+    text-decoration: none;
+    color:white;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+a:hover{
+    text-decoration: none;
+    color:white;
+}
+
+.flex{
+    display: flex;
+}
+
+.mid{
+    font-size:15px;
+}
+
+.huge{
+    font-size: 60px;
+}
+
+.card{
+    border: unset;
+    border-radius: unset;
+}
+
+.card1,.card2,.card3,.card4{
+    box-shadow: 0 10px 30px rgba(0,0,0,.5);
+}
+
+.card1{
+    background: linear-gradient(180deg,#ef7395 10%,#89499f 100%);
+}
+
+.card2{
+    background: linear-gradient(180deg,#57d8ff 10%,#0272bc 100%);
+}
+
+.card3{
+    background: linear-gradient(180deg, #85d2ff 10%,#bd36f2 100%);
+}
+
+.card4{
+    background: linear-gradient(180deg, #b83a60 10%,#273d4f 100%);
+}
+
+.card-footer{
+    background-color: unset;
+    border-top:unset;
+}
+
+.topcard{
+    background-color: #ebebeb;
+}
+
+.right-details
+{
+    display:flex;
+    flex-direction: column;
+}
+
+.rdchild{
+    padding:5px;
+    flex:1;
+}
+
+.dept-details{
+    flex:1;
+}
+
+.topdiv{
+    display:flex;
+}
+
+.toptext{
+    margin: auto 0;
+}
+
+.box-shadow{
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, .05);
+}
