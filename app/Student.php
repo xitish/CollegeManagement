@@ -9,4 +9,9 @@ class Student extends Model
     protected $fillable = [
         'name', 'rollyear','rollfaculty','rollno', 'address', 'email', 'phone', 'citizen', 'date_of_birth', 'photo', 'remarks'
     ];
+
+    public function department()
+    {
+        return $this->belongsTo('App\Department', 'short_name', 'rollfaculty');
+    }
 }

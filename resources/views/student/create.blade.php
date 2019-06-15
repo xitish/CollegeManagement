@@ -98,7 +98,7 @@
                     </span>
                 </div>
 
-                <div class="form-group col-md-3 pl-5">
+                <div class="form-group col-md-3 pl-4">
                     <label for="citizen"><small class="text-muted bold">Citizenship Number</small></label>
                     <input type="text" name="citizen" class="form-control form-control-sm{{ $errors->has('citizen') ? ' is-invalid' : '' }}" value="{{ old('citizen') }}" id="citizen" placeholder="20145/22442" required>
                     

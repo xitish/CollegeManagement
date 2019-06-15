@@ -1,7 +1,14 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+@font-face{
+    font-family: 'PT Sans';
+    src: URL('../fonts/PT_Sans-Web-Regular.ttf') format('truetype');
+}
 
 body{
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'PT Sans', 'sans-seriff';
+}
+
+.border1{
+    border:2px solid red;
 }
 
 a{
@@ -22,8 +29,28 @@ a:hover{
     display: flex;
 }
 
+.f1{
+    flex:1;
+}
+
+.f2{
+    flex:2;
+}
+
+.ma{
+    margin: auto;
+}
+
+.bw-2{
+    border-bottom-width: 2px;
+}
+
 .mid{
     font-size:15px;
+}
+
+.large{
+    font-size:20px;
 }
 
 .huge{
@@ -89,4 +116,28 @@ a:hover{
 
 .box-shadow{
     box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, .05);
+}
+
+/* Department Related */
+.depttop{
+    width:100%;
+    background-image: url('/images/deptbgtop.png');
+    background-size:cover;
+    height: 300px;
+}
+
+.dept-name{
+    margin:auto 0 0;
+}
+
+.circle{
+    border-radius: 50%;
+}
+
+.item-box{
+    background: #eeeeee;
+    border-radius: 5px;
+    padding:10px 30px;
+    border-bottom: 2px solid #d3d3d3;
+    border-left: 2px solid #d3d3d3;
 }

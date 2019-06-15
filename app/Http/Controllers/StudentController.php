@@ -74,7 +74,7 @@ class StudentController extends Controller
             'rollfaculty' => 'required',
             'rollnumber' => 'required',
             'citizen' => 'required',
-            'photo' => 'required|max:1024'
+            'photo' => 'sometimes|max:1024'
         ],$message);
         
         if ($request->hasFile('photo')) {
@@ -91,7 +91,7 @@ class StudentController extends Controller
             'rollfaculty' => $request->input('rollfaculty'),
             'rollno' => $request->input('rollnumber'),
             'citizen' => $request->input('citizen'),
-            'photo' => isset($photo) ? $photo : '',
+            'photo' => isset($photo) ? $photo : 'images/dummy.jpg',
         ]);
 
         return redirect()->route('student.create')->with('info', 'New Student Added');
