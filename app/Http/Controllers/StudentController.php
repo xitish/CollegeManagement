@@ -94,7 +94,7 @@ class StudentController extends Controller
             'photo' => isset($photo) ? $photo : 'images/dummy.jpg',
         ]);
 
-        return redirect()->route('student.create')->with('info', 'New Student Added');
+        return redirect()->route('student.create')->with('success', 'New Student Added');
     }
 
     /**

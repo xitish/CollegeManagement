@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::view('/msg', 'partials.message');
+
 Route::resource('student', 'StudentController');
 Route::resource('department', 'DepartmentController');
 

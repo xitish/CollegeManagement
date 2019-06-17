@@ -7,12 +7,14 @@
     <title>College Management System</title>
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/all.min.css') }}">
 </head>
 <body class="bg-light">
 
     @include('partials.header')
     @yield('content')
 
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 </body>
 </html>

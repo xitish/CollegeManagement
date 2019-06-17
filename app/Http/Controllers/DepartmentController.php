@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Department;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class DepartmentController extends Controller
 {
@@ -14,8 +15,38 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        $departments = Department::all();
-        return view('department.home', ['departments' => $departments]);
+        $first = 0; $second = 0; $third = 0; $fourth = 0;
+
+        $departments = Department::with('students')->get();
+
+        // Count the number of students in each year for all faculties
+        foreach($departments as $dept){
+            
+            $count[$dept->short_name][1] = $dept->students->where('rollyear', 2075)->count();
+            // Example: $count[BCT][1] = BCT First Year
+
+            $count[$dept->short_name][2] = $dept->students->where('rollyear', 2074)->count();
+            // Example: $count[BCT][2] = BCT Second Year
+
+            $count[$dept->short_name][3] = $dept->students->where('rollyear', 2073)->count();
+            // Example: $count[BCT][3] = BCT Third Year
+
+            $count[$dept->short_name][4] = $dept->students->where('rollyear', 2072)->count();
+            // Example: $count[BCT][4] = BCT Fourtn Year
+
+            $count[$dept->short_name][0] = $count[$dept->short_name][1] + $count[$dept->short_name][2] + $count[$dept->short_name][3] + $count[$dept->short_name][4];
+            // Count of total number of students in this faculty.
+
+            //Count Students in each year
+            $first += $count[$dept->short_name][1];
+            $second += $count[$dept->short_name][2];
+            $third += $count[$dept->short_name][3];
+            $fourth += $count[$dept->short_name][4];
+        }
+
+        $yearCount = array('first' => $first, 'second' => $second, 'third' => $third, 'fourth' => $fourth);
+
+        return view('department.home', ['departments' => $departments, 'count' => $count, 'year' => $yearCount]);
     }
 
     /**
@@ -45,12 +76,12 @@ class DepartmentController extends Controller
 
         Department::create([
             'full_name' => $request->input('deptname'),
-            'short_name' => $request->input('shortname'),
+            'short_name' => $request->input('short_name'),
             'hod' => $request->input('hod'),
             'contact' => $request->input('contact')
         ]);
 
-        return redirect()->route('department.index')->with('info', 'New Department Added');
+        return redirect()->route('department.index')->with('success', 'New Department Added');
     }
 
     /**
@@ -59,9 +90,9 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($shortname)
     {
-        $department = Department::where('id','=',$id)->with('students')->first(); //Needs Refactoring. Get students seperately. Dont pass students to front end
+        $department = Department::where('short_name','=',$shortname)->with('students')->first(); //Needs Refactoring. Get students seperately. Dont pass students to front end
 
         // Count number of students of current faculty in each year
         $first = $department->students->where('rollyear', 2075)->count();
@@ -80,9 +111,10 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($shortname)
     {
-        //
+        $department = Department::where('short_name','=',$shortname)->first();
+        return view('department.edit', ['department' => $department]);
     }
 
     /**
@@ -94,7 +126,25 @@ class DepartmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [ 
+            'deptname' => 'required|string|min:5|max:255',
+            'short_name' => [
+                'required', Rule::unique('departments')->ignore($id),
+            ],
+            'hod' => 'required',
+            'contact' => 'required'
+        ]);
+
+        $department = Department::find($id);
+
+        $department->full_name = $request->input('deptname');
+        $department->short_name = $request->input('short_name');
+        $department->hod = $request->input('hod');
+        $department->contact = $request->input('contact');
+
+        $department->save();
+
+        return redirect()->route('department.index')->with('success', 'Department Details Modified Successfully');
     }
 
     /**
@@ -105,6 +155,8 @@ class DepartmentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $department = Department::find($id);
+        $department->delete();
+        return redirect()->route('department.index')->with('info', 'Department Deleted Successfully');
     }
 }

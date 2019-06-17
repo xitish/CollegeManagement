@@ -1,6 +1,6 @@
 @font-face{
     font-family: 'PT Sans';
-    src: URL('../fonts/PT_Sans-Web-Regular.ttf') format('truetype');
+    src: URL('../webfonts/PT_Sans-Web-Regular.ttf') format('truetype');
 }
 
 body{
@@ -13,7 +13,7 @@ body{
 
 a{
     text-decoration: none;
-    color:white;
+    color: unset;
 }
 
 .bold{
@@ -22,7 +22,7 @@ a{
 
 a:hover{
     text-decoration: none;
-    color:white;
+    color: unset;
 }
 
 .flex{
@@ -45,16 +45,40 @@ a:hover{
     border-bottom-width: 2px;
 }
 
+.tiny{
+    font-size: 10px;
+}
+
+.small{
+    font-size: 13px;
+}
+
 .mid{
     font-size:15px;
+}
+
+.mid2{
+    font-size:17px;
 }
 
 .large{
     font-size:20px;
 }
 
+.larger{
+    font-size: 25px;
+}
+
 .huge{
     font-size: 60px;
+}
+
+.blue{
+    color: #2385e0;
+}
+
+.purple{
+    color:#dc3545;
 }
 
 .card{
@@ -130,6 +154,14 @@ a:hover{
     margin:auto 0 0;
 }
 
+.deptindex{
+    width:50px;
+    height:50px;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    padding:10px;
+}
+
 .circle{
     border-radius: 50%;
 }
@@ -140,4 +172,12 @@ a:hover{
     padding:10px 30px;
     border-bottom: 2px solid #d3d3d3;
     border-left: 2px solid #d3d3d3;
+}
+
+.external{
+    transition: all 200ms ease-in-out;
+}
+
+.external:hover{
+    transform: scale(1.2);
 }
