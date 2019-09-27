@@ -70,13 +70,13 @@
                     </span>
                 </div>
 
-                <div class="form-group col-md-1">
+                <div class="form-group col-md-2">
                     <label for="rollfaculty"><small class="text-muted bold"> </small></label>
                     <select id="rollfaculty" name="rollfaculty" class="form-control form-control-sm{{ $errors->has('rollfaculty') ? ' is-invalid' : '' }}">
                     <option value="{{ old('rollfaculty') !==null ? old('rollfaculty') : '' }}" selected>{{ old('rollfaculty') !==null ? old('rollfaculty') : 'Faculty' }}</option>
-                        <option value="BCT">BCT</option>
-                        <option value="BEX">BEX</option>
-                        <option  value="BME">BME</option>
+                        @foreach($deptList as $dept)
+                            <option value="{{$dept->short_name}}">{{ $dept->short_name }}</option>
+                        @endforeach
                     </select>
 
                     <span class="invalid-feedback" role="alert">
@@ -84,13 +84,13 @@
                     </span>
                 </div>
 
-                <div class="form-group col-md-1">
+                <div class="form-group col-md-2">
                     <label for="rollnumber"><small class="text-muted bold"> </small></label>
                     <select id="rollnumber" name="rollnumber" class="form-control form-control-sm {{ $errors->has('rollnumber') ? ' is-invalid' : '' }}">
                     <option value="{{ old('rollnumber') !==null ? old('rollnumber') : '' }}" selected>{{ old('rollnumber') !==null ? old('rollnumber') : 'Roll No' }}</option>
-                        <option value="01">01</option>
-                        <option value="02">02</option>
-                        <option value="03">03</option>
+                    @for ($i = 1; $i < 97; $i++) 
+                        <option value="{{ $i }}">{{ $i }}</option>
+                    @endfor
                     </select>
 
                     <span class="invalid-feedback" role="alert">
@@ -107,7 +107,7 @@
                     </span>
                 </div>
 
-                <div class="form-group col-md-5 pl-5">
+                <div class="form-group col-md-3 pl-3">
                     <label for="photo"><small class="text-muted bold">Student's Photo</small></label>
                     <input type="file" name="photo" class="form-control-file form-control-sm{{ $errors->has('photo') ? ' is-invalid' : '' }}" value="{{ old('photo') }}" id="photo">
                     

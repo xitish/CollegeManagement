@@ -12,6 +12,6 @@ class Student extends Model
 
     public function department()
     {
-        return $this->belongsTo('App\Department', 'short_name', 'rollfaculty');
+        return $this->belongsTo('App\Department', 'rollfaculty', 'short_name');
     }
 }

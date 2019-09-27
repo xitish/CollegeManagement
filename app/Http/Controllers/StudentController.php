@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Student;
+use App\Department;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -15,7 +16,10 @@ class StudentController extends Controller
      */
     public function index()
     {
-        return view('student.home');
+        $students = Student::all();
+        $faculty = Department::select('short_name')->get();
+
+        return view('student.home', ['students' => $students, 'faculty' => $faculty]);
     }
 
     /**
@@ -25,7 +29,8 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view('student.create');
+        $departmentList = Department::select('short_name')->get();
+        return view('student.create', ['deptList' => $departmentList]);
     }
 
     /**

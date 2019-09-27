@@ -32,6 +32,26 @@
         <h5 class="border-bottom border-gray pb-2 mb-0 bw-2"><b>Overview</b></h5>
         <div class="clearfix"></div>
 
+        <div class="row border-bottom border-gray ml-0 mr-0 pt-2 pb-2">
+            <div class="col-5">
+                <span class="mid2 text-muted bold mr-4">S.N</span>
+                <span class="mid2 text-muted bold">Name of Department</span>
+            </div>
+
+            <div class="col-4 text-center">
+                <span class="mid2 text-muted bold">Number of Students</span>
+            </div>
+
+            <div class="col-1 text-center">
+                <span class="mid2 text-muted bold">Total</span>
+            </div>
+
+            <div class="col-2 text-center">
+                <span class="mid2 text-muted bold">Action</span>
+            </div>
+
+        </div>
+
         @foreach($departments as $i => $dept)
             <div class="row">
                 <div class="col-5">
@@ -46,7 +66,7 @@
                     </div>
                 </div>
 
-                <div class="col-2 text-right right-details text-muted border-bottom border-gray">
+                <div class="col-2 text-center right-details text-muted border-bottom border-gray">
                     <div class="dept-details pt-2 pb-1 mb-0 lh-125">
                         I Year &nbsp; <b class="text-primary "> {{ $count[$dept->short_name][1] }} </b>
                     </div>
@@ -56,7 +76,7 @@
                     </div>
                 </div>
 
-                <div class="col-2 text-right right-details text-muted border-bottom border-gray">
+                <div class="col-2 text-center right-details text-muted border-bottom border-gray">
                     <div class="dept-details pt-2 pb-1 mb-0 lh-125">
                         III Year &nbsp; <b class="text-primary "> {{ $count[$dept->short_name][3] }} </b>
                     </div>
@@ -68,7 +88,7 @@
 
                 <div class="col-1 text-center flex">
                     <div class="border-bottom border-gray w-100 flex">
-                        <p style="margin:auto;">Total <br> <b> {{ $count[$dept->short_name][0] }}</b> </p>
+                        <p style="margin:auto;"><b> {{ $count[$dept->short_name][0] }}</b> </p>
                     </div>
                     
                 </div>
