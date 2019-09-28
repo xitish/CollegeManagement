@@ -15,9 +15,13 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::view('/msg', 'partials.message');
-
+// Student Related Routes
 Route::resource('student', 'StudentController');
+
+//Department Related Routes
 Route::resource('department', 'DepartmentController');
+Route::get('department/{shortname}/year/{year}', 'DepartmentController@yearWise');
+
+Route::get('date/{year}', 'StudentController@getBatch');
 
 Auth::routes();

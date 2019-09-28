@@ -2,12 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Department;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 class DepartmentController extends Controller
 {
+    /** Get the batch (admitted year) of student given the year (1st, 2nd 3rd or 4th) */
+    public function getBatch($year)
+    {
+        // Get Current English Year and Month
+        $currentYear = Carbon::now()->format('Y');
+        $currentMonth = Carbon::now()->format('m');
+
+        // Convert To Nepali Year and Month
+        $nepaliYear = $currentYear + ($currentMonth > 4 ? 57 : 56 );
+        $nepaliMonth = ($currentMonth + 8) % 12;
+
+        /** Get batch (admitted year) by subtracting current given Year from current Nepali Year.
+        *   Note: If Nepali month is greater the 7 (Kartik), the student admitted in the present Nepali year are First Year Students
+        */
+        $batch = ($nepaliYear - $year) + ($nepaliMonth > 7 ? 1 : 0);
+        return $batch;
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -44,9 +63,12 @@ class DepartmentController extends Controller
             $fourth += $count[$dept->short_name][4];
         }
 
-        $yearCount = array('first' => $first, 'second' => $second, 'third' => $third, 'fourth' => $fourth);
+        // If no departments present, set count variable to empty array.
+        if(empty($count)){$count = array();}
 
-        return view('department.home', ['departments' => $departments, 'count' => $count, 'year' => $yearCount]);
+        $year = array('first' => $first, 'second' => $second, 'third' => $third, 'fourth' => $fourth);
+
+        return view('department.home', compact('departments', 'count', 'year'));
     }
 
     /**
@@ -158,5 +180,13 @@ class DepartmentController extends Controller
         $department = Department::find($id);
         $department->delete();
         return redirect()->route('department.index')->with('info', 'Department Deleted Successfully');
+    }
+
+    /** Show student list of given year */
+    public function yearWise($shortname, $year)
+    {
+        $department = Department::where('short_name','=',$shortname)->with('students')->firstOrFail();
+        $students = $department->students->where('rollyear', $this->getBatch($year));
+        return view('year.home', compact('department', 'students'));
     }
 }

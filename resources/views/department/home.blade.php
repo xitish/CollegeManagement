@@ -60,7 +60,9 @@
                             <span class="large bold"> {{ $i+1 }} </span>
                         </div>
                         <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+                        <a href="{{ route('department.show', ['shortname' => $dept->short_name] )}}" target="_blank" rel="noopener noreferrer" title="Visit the Department's Page">
                             <strong class="mid2 mb-1 text-danger">{{$dept->full_name}}</strong>
+                        </a>
                             <span class="d-block mid text-dark">Head of Department : <b>{{$dept->hod}} </b> &nbsp; | &nbsp; <i class="fas fa-phone-alt small"></i> &nbsp; <b>{{$dept->contact}}</b></span>
                         </p>
                     </div>
@@ -115,7 +117,7 @@
                 <h3 class="pt-3 pb-3" style="margin:auto 0 auto 55px;">Total</h3>
             </div>
 
-            <div class="col-2 text-right right-details">
+            <div class="col-2 text-center right-details">
                 <div class="dept-details pt-2 pb-1 mb-0 lh-125">
                     I Year &nbsp; <b class="text-warning"> {{ $year['first'] }}</b>
                 </div>
@@ -125,7 +127,7 @@
                 </div>
             </div>
 
-            <div class="col-2 text-right right-details">
+            <div class="col-2 text-center right-details">
                 <div class="dept-details pt-2 pb-1 mb-0 lh-125">
                     III Year &nbsp; <b class="text-warning "> {{ $year['third'] }}</b>
                 </div>

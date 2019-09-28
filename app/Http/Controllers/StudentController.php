@@ -18,7 +18,6 @@ class StudentController extends Controller
     {
         $students = Student::all();
         $faculty = Department::select('short_name')->get();
-
         return view('student.home', ['students' => $students, 'faculty' => $faculty]);
     }
 
